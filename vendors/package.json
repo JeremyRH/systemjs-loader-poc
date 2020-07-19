@@ -1,0 +1,19 @@
+{
+  "name": "seismic-vendors",
+  "version": "1.2.3",
+  "description": "Collection of 3rd party dependencies",
+  "main": "dist/vendors-node.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^6.0.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "systemjs": "^6.3.3"
+  }
+}

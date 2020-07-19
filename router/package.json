@@ -1,0 +1,18 @@
+{
+  "name": "router",
+  "version": "1.3.0",
+  "description": "Loads the feature module based on the URL hash",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "content-manager": "file:../content-manager",
+    "doc-center": "file:../doc-center",
+    "search": "file:../search",
+    "seismic-vendors": "file:../vendors"
+  }
+}

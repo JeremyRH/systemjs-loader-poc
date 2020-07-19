@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SystemJS Loader POC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    https://github.com/systemjs/systemjs/blob/master/docs/import-maps.md
+    Import maps are the standardized version of Seismic's manifest. It's not
+    clear how we will update it but we should make it available at build-time
+    in order to fail builds when there is a version mismatch.
+    Import maps can be inlined to speed up loading of resources.
+  -->
+  <script type="systemjs-importmap" src="importmap.json"></script>
+  <script src="vendors/dist/systemjs.js"></script>
+  <!--
+    Webpack will make import specifiers of dynamic `import()` and `System.import()` external.
+    SystemJS loads externals before executing the requested module. This is not the behavior we want.
+    We want to conditionally load some modules, not load them all up front.
+    Creating an alias for System prevents webpack from making the specifiers external.
+    This means all feature modules will have to use `SystemJS.import()` instead of `import()` unless
+    we make a webpack plugin to transform this.
+  -->
+  <script defer>window.SystemJS = System;</script>
+  <!-- Vendors. React, ReactDOM, etc. -->
+  <script type="systemjs-module" src="vendors/dist/vendors-browser.1.2.3.js"></script>
+  <!-- Load toolkit and search up-front because we know we will need them -->
+  <script type="systemjs-module" src="toolkit/dist/toolkit-browser.2.1.2.js"></script>
+  <script type="systemjs-module" src="search/dist/search-browser.1.3.0.js"></script>
+  <!-- The routing layer. Loads feature modules based on the URL -->
+  <script type="systemjs-module" src="router/dist/router.1.3.0.js"></script>
+</head>
+<body>
+  <a href="#/doc-center">Doc Center</a>
+  <a href="#/content-manager">Content Manager</a>
+  <div id="root"></div>
+</body>
+</html>

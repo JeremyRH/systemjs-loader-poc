@@ -1,0 +1,17 @@
+{
+  "name": "content-manager",
+  "version": "1.44.0",
+  "description": "The Content Manager feature module",
+  "main": "dist/content-manager-node.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "seismic-vendors": "file:../vendors",
+    "toolkit": "file:../toolkit"
+  }
+}
