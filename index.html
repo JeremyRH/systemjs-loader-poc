@@ -15,14 +15,13 @@
   <script type="systemjs-importmap" src="importmap.json"></script>
   <script src="vendors/dist/systemjs.js"></script>
   <!--
-    Webpack will make import specifiers of dynamic `import()` and `System.import()` external.
+    Webpack will mark modules imported using dynamic `import()` or `System.import()` as external.
     SystemJS loads externals before executing the requested module. This is not the behavior we want.
-    We want to conditionally load some modules, not load them all up front.
-    Creating an alias for System prevents webpack from making the specifiers external.
-    This means all feature modules will have to use `SystemJS.import()` instead of `import()` unless
-    we make a webpack plugin to transform this.
+    We want to load feature modules on navigation, not load them all up front.
+    Creating an alias for System prevents webpack from marking the lazy loaded modules as external.
+    A custom webpack plugin is used to transform `import()` into `SystemJS.import()`.
   -->
-  <script defer>window.SystemJS = System;</script>
+  <script>window.SystemJS = System;</script>
   <!-- Vendors. React, ReactDOM, etc. -->
   <script type="systemjs-module" src="vendors/dist/vendors-browser.1.2.3.js"></script>
   <!-- Load toolkit and search up-front because we know we will need them -->

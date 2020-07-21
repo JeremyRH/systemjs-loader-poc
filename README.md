@@ -19,4 +19,4 @@ Run `npx serve` from the project root and navigate to the local server in your b
 We speed up part of this process by preloading modules we know will be used by every feature module. You can see toolkit is included in the `index.html` even though it is a nested dependency. If we remove it from `index.html`, everything will still work but toolkit will be downloaded at a later time.
 
 ### Node.js builds
-There are Node.js builds included in the `dist` directories. These can be used for unit/integration tests. Note: dynamic `import()` doesn't work properly for these builds. A webpack plugin will probably be needed to get this to work.
+There are Node.js builds included in the `dist` directories. These can be used for unit/integration tests.

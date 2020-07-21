@@ -1,0 +1,6 @@
+{
+  "name": "babel-plugin-render-dynamic-import",
+  "version": "0.1.0",
+  "description": "Babel plugin that transforms dynamic import() using a user-provided function.",
+  "main": "index.js"
+}

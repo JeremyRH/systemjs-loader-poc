@@ -1,9 +1,16 @@
 const path = require("path");
 
-// Externals can come from an NPM package, CDN asset, Azure storage, etc.
-// For simplicity, we're using require() and reusing the import map.
+// Externals are derived from the import map.
 const { imports } = require("../importmap.json");
 const externals = Object.keys(imports);
+
+// Transforms dynamic import to SystemJS.import. Will only transform imports
+// listed in the import map.
+function renderDynamicImport(importSpecifier) {
+  if (imports.hasOwnProperty(importSpecifier)) {
+    return { left: "SystemJS.import(", right: ")" };
+  }
+}
 
 module.exports = [
   // Browser version
@@ -16,8 +23,29 @@ module.exports = [
       libraryTarget: "system",
     },
     externals,
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            // A babel plugin is used to transform dynamic import so we need babel-loader.
+            loader: "babel-loader",
+            options: {
+              plugins: [
+                [
+                  "babel-plugin-render-dynamic-import",
+                  { renderDynamicImport },
+                ],
+              ],
+            },
+          },
+        },
+      ],
+    },
   },
   // Node version
+  // No need to transform dynamic imports for node, webpack does this for us.
   {
     mode: "development",
     entry: "./src/doc-center.js",
@@ -26,6 +54,7 @@ module.exports = [
       filename: `doc-center-node.js`,
       libraryTarget: "commonjs2",
     },
+    externals,
     devtool: false,
   },
 ];

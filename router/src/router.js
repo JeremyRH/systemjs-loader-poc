@@ -2,11 +2,11 @@ import { React, ReactDOM } from "seismic-vendors";
 import Search from "search";
 import useRoutes from "./useRoutes";
 
-// React.lazy and SystemJS.import allows us to dynamically import an external bundle.
-// The import map allows us to use bare import specifiers (e.g. "content-manager")
-// instead of a URL.
-const LazyContentManager = React.lazy(() => SystemJS.import("content-manager"));
-const LazyDocCenter = React.lazy(() => SystemJS.import("doc-center"));
+// React.lazy and dynamic import allows us to lazy load external bundles.
+// This is transformed at build time to use SystemJS.import (browser) or require (node).
+// SystemJS uses the import map to fetch bare import specifiers (e.g. "content-manager").
+const LazyContentManager = React.lazy(() => import("content-manager"));
+const LazyDocCenter = React.lazy(() => import("doc-center"));
 
 const routes = {
   "#/content-manager": LazyContentManager,
