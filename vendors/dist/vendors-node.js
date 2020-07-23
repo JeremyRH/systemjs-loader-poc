@@ -28618,7 +28618,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "ReactDOM", function() { return react_dom__WEBPACK_IMPORTED_MODULE_1__; });
 // This file is meant to be used to provide access to all the shared vendors in Seismic.
-// Unfortunatly this means all vendors will need to be imported this way: import { React } from "seismic-vendors";
+// This means all vendors will need to be imported this way: import { React } from "seismic-vendors";
 
 
 

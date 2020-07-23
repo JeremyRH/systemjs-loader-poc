@@ -24,7 +24,6 @@ module.exports = [
       // Using this module's own entry in the import map to set the public path.
       publicPath: path.dirname(imports["content-manager"]) + "/",
     },
-    externals,
     module: {
       rules: [
         {
@@ -43,8 +42,17 @@ module.exports = [
             },
           },
         },
+        {
+          test: /\.css$/,
+          use: [
+            { loader: "style-loader", options: { injectType: "linkTag" } },
+            { loader: "file-loader" },
+          ],
+          sideEffects: true,
+        },
       ],
     },
+    externals,
   },
   // Node version
   // No need to transform dynamic imports for node, webpack does this for us.
@@ -56,7 +64,16 @@ module.exports = [
       filename: `content-manager-node.js`,
       libraryTarget: "commonjs2",
     },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"],
+          sideEffects: true,
+        },
+      ],
+    },
     externals,
-    devtool: false
+    devtool: false,
   },
 ];
