@@ -9,7 +9,7 @@
     "@babel/core": "^7.10.5",
     "babel-loader": "^8.3.0",
     "babel-plugin-render-dynamic-import": "file:../babel-plugin-render-dynamic-import",
-    "webpack": "^5.75.0",
+    "webpack": "^5.76.0",
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
